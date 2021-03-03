@@ -10,8 +10,9 @@ Promise.all([
   db.query(`CREATE TABLE IF NOT EXISTS user_table(
         id VARCHAR(255) NOT NULL PRIMARY KEY,
         username VARCHAR(255) NOT NULL,
-        photo_url VARCHAR(255) NOT NULL,
         passwordHash VARCHAR(255) NOT NULL,
+        email VARCHAR(255),
+        phone VARCHAR(255),
         CONSTRAINT username_already_exists UNIQUE(username)
       )`),
   db.query(`CREATE TABLE IF NOT EXISTS post_table (
@@ -22,6 +23,9 @@ Promise.all([
         price FLOAT NOT NULL,
         description VARCHAR(255),
         category VARCHAR(255),
+        location VARCHAR(255),
+        postdate DATETIME,
+        delivery VARCHAR(255),
 	      CONSTRAINT fk_user
 		      FOREIGN KEY(user_id)
 		      REFERENCES user_table(id)

@@ -3,10 +3,8 @@ require("express-async-errors"); // Passes errors on, in async-await functions
 const app = express();
 const cors = require("cors");
 const cloudinary = require("cloudinary");
-const userRouter = require("./controllers/user");
-const loginRouter = require("./controllers/login");
-const itemRouter = require("./controllers/item");
-const cartRouter = require("./controllers/cart");
+const userRouter = require("./routes/user");
+const loginRouter = require("./routes/login");
 const middleware = require("./utils/middleware");
 
 app.use(cors());
