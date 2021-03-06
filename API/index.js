@@ -11,8 +11,6 @@ Promise.all([
         id VARCHAR(255) NOT NULL PRIMARY KEY,
         username VARCHAR(255) NOT NULL,
         passwordHash VARCHAR(255) NOT NULL,
-        email VARCHAR(255),
-        phone VARCHAR(255),
         CONSTRAINT username_already_exists UNIQUE(username)
       )`),
   db.query(`CREATE TABLE IF NOT EXISTS post_table (

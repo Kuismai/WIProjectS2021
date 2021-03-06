@@ -6,20 +6,18 @@ const { v4: uuidv4 } = require("uuid");
 
 const User = require("../models/user_model");
 
-const cloudinary = require("cloudinary");
-const middleware = require("../utils/middleware");
-
-router.post("/", middleware.multerUpload, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const body = req.body;
   const saltRounds = 10;
   const id = await uuidv4();
   const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
+  /*
   if (req.file !== undefined) {
     const file = await middleware.dataUri(req).content;
     const result = await cloudinary.uploader.upload(file);
   }
-
+*/
   const user = {
     id,
     username: body.username,

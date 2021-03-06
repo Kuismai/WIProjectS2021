@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import APILogin from './api/APILogin.js';
+import APIRegister from './api/APIRegister.js';
 
 export default function Login(props) {
     const [username, setUsername] = useState("");
@@ -10,14 +12,31 @@ export default function Login(props) {
 
     function loginButton (event)
     {
-            alert("It happened!");
+        APILogin(username, password)
+          .then(res => {
+            if(res.data){
+              alert("Logged in successfully!")
+              localStorage.setItem("username", username);
+              localStorage.setItem("tokenUser", res.data.token);
+              props.loginSuccess(); //set state to logged in 
+        }
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
     }
 
     //sign up
 
-    function registerButton (event)
+    function registerButton ()
     {
-        alert("signing up...");
+        APIRegister(username, password)
+        .then(function (res) {
+          console.log(res.data);
+          })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
   return (

@@ -2,13 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Login from './login';
 import Header from './header';
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function App() {
   return (
     <ScrollView>
-    <View style={styles.container}>
       <Text>The very awesome store app</Text>
+    <View style={styles.container}>
+      
       <Login />
       
       <StatusBar style="auto" />
