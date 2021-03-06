@@ -2,7 +2,7 @@ const express = require("express");
 require("express-async-errors"); // Passes errors on, in async-await functions
 const app = express();
 const cors = require("cors");
-const cloudinary = require("cloudinary");
+//const cloudinary = require("cloudinary");
 const userRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
 const middleware = require("./utils/middleware");
@@ -16,7 +16,6 @@ app.get("/", (req, res) => {
 
   
 app.use("/api/users", userRouter);
-
 app.use("/api/login", loginRouter);
 
 module.exports = app;
