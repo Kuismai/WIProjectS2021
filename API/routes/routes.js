@@ -29,7 +29,7 @@ router.post("/", middleware.multerUpload, async (req, res, next) => {
   };
 
   const savedUser = await User.add(user);
-  // res.json(savedUser.rows);
+  res.json(savedUser.rows);
 
   const userForToken = {
     username: savedUser.rows[0].username,

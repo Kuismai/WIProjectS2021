@@ -12,12 +12,7 @@ router.post("/", async (req, res, next) => {
   const id = await uuidv4();
   const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
-  /*
-  if (req.file !== undefined) {
-    const file = await middleware.dataUri(req).content;
-    const result = await cloudinary.uploader.upload(file);
-  }
-*/
+  
   const user = {
     id,
     username: body.username,
@@ -25,7 +20,7 @@ router.post("/", async (req, res, next) => {
   };
 
   const savedUser = await User.add(user);
-  // res.json(savedUser.rows);
+  res.json(savedUser.rows);
 
   const userForToken = {
     username: savedUser.rows[0].username,
