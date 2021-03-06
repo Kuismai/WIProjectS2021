@@ -8,12 +8,13 @@ export default function Login(props) {
     const [username2, setUsername2] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-
+    const [login, setLogin] = useState(props.status);
     
     //simple login
 
     function loginButton (event)
     {
+      event.preventDefault();
         APILogin(username, password)
           .then(res => {
             if (res.status == 401) {
@@ -22,11 +23,12 @@ export default function Login(props) {
             if(res.data){
               localStorage.setItem("username", username);
               localStorage.setItem("tokenUser", res.data.token);
-              props.loginSuccess(); //set state to logged in 
+              (login) =>setLogin(username); 
         }
       })
       .catch(error => {
         console.log("could not log in");
+        console.log(error);
       });
     }
 
@@ -36,10 +38,18 @@ export default function Login(props) {
     {
         APIRegister(username2, password2)
         .then(function (res) {
+          if (res.status == 200) {
           console.log(res.data);
-          })
+         // alert("Registration successful");
+          }
+
+          else if (res.status == 500) {
+            console.log("username already in use");
+          };
+        })
         .catch(function (error) {
-          console.log(error);
+          console.log(error.response);
+          alert("Registration unsuccessful");
         });
     }
 

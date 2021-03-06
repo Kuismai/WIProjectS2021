@@ -1,15 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import Login from './login';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function App() {
+
+  const [login, setLogin] = useState("false");
+
   return (
     <ScrollView>
       <Text>The very awesome store app</Text>
+      <Text>Logged in: {login}</Text>
     <View style={styles.container}>
       
-      <Login />
+      <Login status={login} logIn={setLogin}/>
       
       <StatusBar style="auto" />
     </View>

@@ -34,6 +34,8 @@ router.post("/", async (req, res, next) => {
 
   const token = jwt.sign(userForToken, process.env.SECRET);
 
+  
+
   res
     .status(200)
     .send({
