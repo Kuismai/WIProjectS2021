@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import APILogin from './api/APILogin.js';
 import APIRegister from './api/APIRegister.js';
 
 export default function Login(props) {
     const [username, setUsername] = useState("");
+    const [username2, setUsername2] = useState("");
     const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
 
     
     //simple login
@@ -14,15 +16,17 @@ export default function Login(props) {
     {
         APILogin(username, password)
           .then(res => {
+            if (res.status == 401) {
+              Alert("Password or username incorrect");
+            }
             if(res.data){
-              alert("Logged in successfully!")
               localStorage.setItem("username", username);
               localStorage.setItem("tokenUser", res.data.token);
               props.loginSuccess(); //set state to logged in 
         }
       })
       .catch(error => {
-        console.log(error.response);
+        console.log("could not log in");
       });
     }
 
@@ -30,7 +34,7 @@ export default function Login(props) {
 
     function registerButton ()
     {
-        APIRegister(username, password)
+        APIRegister(username2, password2)
         .then(function (res) {
           console.log(res.data);
           })
@@ -42,7 +46,7 @@ export default function Login(props) {
   return (
       <View style={styles.container}>
       <View style={styles.loginbox}>
-          <Text>Log In</Text>
+      <Text>Log In</Text>
             <TextInput style={styles.TextInput}
             defaultValue="username"
             onChangeText={(username) => setUsername(username)}
@@ -54,21 +58,24 @@ export default function Login(props) {
             />
             <TouchableOpacity 
             onPress={loginButton}>
-                Log in</TouchableOpacity>
+                <Text>Log in</Text>
+                </TouchableOpacity>
         </View>
         <View style={styles.loginbox}>
+          <Text>
         <Text>Register</Text>
+        </Text>
             <TextInput style={styles.TextInput}
             defaultValue="username"
-            onChangeText={(username) => setUsername(username)}
+            onChangeText={(username2) => setUsername2(username2)}
             />
             <TextInput
             secureTextEntry={true}
             defaultValue="password"
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={(password2) => setPassword2(password2)}
             />
             <TouchableOpacity 
-            onPress={registerButton}>Sign up</TouchableOpacity>
+            onPress={registerButton}><Text>Sign up</Text></TouchableOpacity>
         </View>
         
       </View>
