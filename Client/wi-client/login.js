@@ -8,7 +8,6 @@ export default function Login(props) {
     const [username2, setUsername2] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-    const [login, setLogin] = useState(props.status);
     
     //simple login
 
@@ -23,7 +22,8 @@ export default function Login(props) {
             if(res.data){
               localStorage.setItem("username", username);
               localStorage.setItem("tokenUser", res.data.token);
-              (login) =>setLogin(username); 
+              props.logIn(username); 
+              console.log("log in successful");
         }
       })
       .catch(error => {

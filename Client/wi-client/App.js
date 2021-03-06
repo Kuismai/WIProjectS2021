@@ -6,6 +6,9 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 export default function App() {
 
   const [login, setLogin] = useState("false");
+  const changeLogin = (props) => {
+    setLogin(props);
+  }
 
   return (
     <ScrollView>
@@ -13,7 +16,7 @@ export default function App() {
       <Text>Logged in: {login}</Text>
     <View style={styles.container}>
       
-      <Login status={login} logIn={setLogin}/>
+      <Login status={login} logIn={changeLogin}/>
       
       <StatusBar style="auto" />
     </View>
